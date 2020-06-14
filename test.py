@@ -66,7 +66,7 @@ def search():
 
 
 def check():
-
+os.system ("clear")
     global br
     global passwords
     try:
@@ -103,7 +103,6 @@ def check():
         sys.exit(1)
     try:
  
-os.system ("clear")
         print TUTO
         print TUTO2
         print "\n\n\n  Atacando Cuenta : %s" % (email)
