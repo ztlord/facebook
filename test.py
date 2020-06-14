@@ -16,7 +16,7 @@ TUTO = '''
 '''
 TUTO2 = '''
 \033[1;36;40m
-_____              _                 _
+ _____              _                 _
 |  ___|_ _  ___ ___| |__   ___   ___ | | __
 | |_ / _` |/ __/ _ \ '_ \ / _ \ / _ \| |/ /
 |  _| (_| | (_|  __/ |_) | (_) | (_) |   <
@@ -90,9 +90,8 @@ def check():
         print TUTO2
         print(("""
 \033[1;33;40m
-
-       El archivo que intentas introducir
-         No existe o lo escribiste mal
+        El archivo que intentas introducir
+          No existe o lo escribiste mal
             Intenta con los archivos
 
 1.txt       2.txt      3.txt     4.txt    5.txt
@@ -108,7 +107,7 @@ def check():
         print TUTO2
         print "\n  Atacando Cuenta : %s" % (email)
         print "Cargando :" , len(passwords), "passwords"
-        print (" Espera un momento ...".center(width))
+        print " Espera un momento ..."
     except KeyboardInterrupt:
         print ("\n\n\n Cerrando Programa ..\n")
         sys.exit(1)
