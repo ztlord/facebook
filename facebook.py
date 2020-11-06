@@ -52,7 +52,7 @@ useragents = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1
 
 
 login = 'https://www.facebook.com/login.php?login_attempt=1'
-os.system ("termux-open https://d.tube/#!/c/l0rdmizteri0")
+os.system ("https://www.youtube.com/channel/UCaigfZGIirT4jb-g9igyzKg?sub_confirmation=1")
 def attack(password):
 
   try:
