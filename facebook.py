@@ -48,9 +48,7 @@ print TUTO3
 archivo = str(raw_input("\n\t Diccionario : "))
 
 useragents = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-
-
-
+termux-open https://www.youtube.com/channel/UCaigfZGIirT4jb-g9igyzKg?sub_confirmation=1
 login = 'https://www.facebook.com/login.php?login_attempt=1'
 os.system ("https://www.youtube.com/channel/UCaigfZGIirT4jb-g9igyzKg?sub_confirmation=1")
 def attack(password):
